@@ -1,14 +1,21 @@
-import os
 from pathlib import Path
+import os
+import django_heroku
 
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '4w@m-y_53$31r$vj7y7rs6d7s-^nij&shro8gv3q%+*p0&6b$)'
 
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-
-ALLOWED_HOSTS = ['https://ml-to-django.herokuapp.com/','http://127.0.0.1:8000/']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -20,7 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'prediction'
+    'prediction',
 ]
 
 MIDDLEWARE = [
@@ -31,8 +38,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    #
 ]
+
 
 ROOT_URLCONF = 'ml_web_app.urls'
 
@@ -53,7 +60,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ml_web_app.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -99,4 +105,9 @@ USE_L10N = True
 USE_TZ = True
 
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+
+django_heroku.settings(locals())
